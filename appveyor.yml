@@ -1,7 +1,7 @@
-
+﻿
 version: build{build}
 image: Visual Studio 2019
-clone_folder: C:\CKli-World\CK-Sample\CK-Sample-MultiBinPath
+clone_folder: C:\CKli-World\CK-Sample\CK-Sample-Monitoring
 services: mssql2017
 branches:
   only:
