@@ -35,7 +35,7 @@
 
   <!--<StandardProperties>-->
   <PropertyGroup>
-    <RepositoryUrl>https://github.com/signature-opensource/CK-Sample-MultiBinPath</RepositoryUrl>
+    <RepositoryUrl>https://github.com/signature-opensource/CK-Sample-Monitoring</RepositoryUrl>
     <ProductName>CK</ProductName>
     <Company>Signature Code</Company>
     <Authors>Signature Code</Authors>
@@ -50,7 +50,7 @@
     <PackageIcon>PackageIcon.png</PackageIcon>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)PackageIcon.png" Pack="true" PackagePath="\" Visible="false" />
+    <None Include="$(MSBuildThisFileDirectory)PackageIcon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
   <!--</StandardProperties>-->
 
