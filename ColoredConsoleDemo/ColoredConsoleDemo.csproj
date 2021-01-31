@@ -4,6 +4,6 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CK.ActivityMonitor.SimpleSender" Version="13.3.2--0006-develop" />
+    <PackageReference Include="CK.ActivityMonitor.SimpleSender" Version="13.3.2" />
   </ItemGroup>
 </Project>
