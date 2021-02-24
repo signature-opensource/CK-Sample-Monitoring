@@ -60,7 +60,7 @@ namespace MonitoringDemoApp
                 {
                     // Standard .Net logger configuration.
                     // By default, we route all the .Net logs to a special "monitor" that is the "00000000-0000-0000-0000-000000000000": this
-                    // special (fake) monitor captures all contectless logs sent to GrandOutput.ExternalLog methods.
+                    // special (fake) monitor captures all contextless logs sent to GrandOutput.ExternalLog methods.
 
                     // This is added *before* configuration is loaded: configuration can override this default.
                     // By default, we log everything in Development mode and only Information level otherwise.

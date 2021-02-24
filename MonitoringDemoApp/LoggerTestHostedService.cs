@@ -39,7 +39,7 @@ namespace MonitoringDemoApp
             _options.OnChange( ( config, name ) =>
             {
                 // Monitoring the change here would be a mistake: the OnChange is called from a background thread
-                // that can be in parallel with OnTime call (and even StartAsync: we may not even have instatiated the timer here!).
+                // that can be in parallel with OnTime call (and even StartAsync: we may not even have instantiated the timer here!).
                 // The safest and cleanest way to handle this is simply to set a dirty flag that will trigger the timer reconfiguration
                 // in the next OnTime... or right now (since OnTime reentrancy is safe).
                 _dirtyOption = true;
@@ -49,7 +49,7 @@ namespace MonitoringDemoApp
 
         public Task StartAsync( CancellationToken stoppingToken )
         {
-            // This monitor is tied to this service. It is sollicited from (and only from)
+            // This monitor is tied to this service. It is solicited from (and only from)
             // the OnTime method that prevents reentrancy: only one thread enters the monitor at a time.
             _monitor.Info( "LoggerTestHostedService started." );
             _timer = new Timer( OnTime, null, TimeSpan.Zero, _options.CurrentValue.TimerDuration );
