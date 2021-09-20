@@ -14,7 +14,7 @@ namespace MonitoringDemoApp
         public TimeSpan TimerDuration { get; set; }
 
         /// <summary>
-        /// Gets or sets whether <see cref="TaskScheduler.UnobservedTaskException"/> should be sollicited.
+        /// Gets or sets whether <see cref="TaskScheduler.UnobservedTaskException"/> should be solicited.
         /// </summary>
         public bool ThrowTaskSchedulerUnobservedTaskException { get; set; } = true;
 

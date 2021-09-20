@@ -13,7 +13,6 @@ namespace MonitoringDemoApp
         {
             // This doesn't use the CreateDefaultBuilder helper.
             // Instead, the configuration here is detailed and explicit.
-            // (See the Back.Web program for a default configuration.)
             var host = new HostBuilder()
                 // Current directory is... complicated! See https://github.com/dotnet/project-system/issues/5053.
                 // To overcome this mess, we set a MSBuild property <RunWorkingDirectory>$(MSBuildProjectDirectory)</RunWorkingDirectory>
@@ -76,12 +75,12 @@ namespace MonitoringDemoApp
                     logging.AddConfiguration( hostingContext.Configuration.GetSection( "Logging" ) );
                 } )
                 // This configures the GrandOutput.Default and provides a scoped IActivityMonitor to the DI.
-                // By default, the section name is "Monitoring".
-                .UseMonitoring()
+                // By default, the section name is "Monitoring" (but it should be "CK-Monitoring").
+                .UseMonitoring( configurationPath: "CK-Monitoring" )
                 .ConfigureServices( (host, services) =>
                 {
                     // Registers the hosted service that periodically sends logs (and its configuration).
-                    services.Configure<LoggerTestHostedServiceConfiguration>( host.Configuration.GetSection( "TesLogs" ) );
+                    services.Configure<LoggerTestHostedServiceConfiguration>( host.Configuration.GetSection( "StupidLogGenerator" ) );
                     services.AddHostedService<LoggerTestHostedService>();
                 } )
                 .Build();
