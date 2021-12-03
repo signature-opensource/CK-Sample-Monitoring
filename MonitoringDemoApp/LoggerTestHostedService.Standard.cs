@@ -15,9 +15,9 @@ namespace MonitoringDemoApp
 {
     public partial class LoggerTestHostedService : IHostedService, IDisposable
     {
-        void OnTimeStandardLogs()
+        void OnTimeStandardLogs( int workCount )
         {
-            switch( _workCount % 16 )
+            switch( workCount % 16 )
             {
                 case 0: _monitor.Debug( "A debug line (most verbose level)." ); break;
                 case 1: _monitor.Trace( $"A trace line (not always the same: {Guid.NewGuid()})." ); break;

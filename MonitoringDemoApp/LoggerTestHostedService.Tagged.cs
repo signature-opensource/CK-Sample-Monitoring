@@ -19,26 +19,36 @@ namespace MonitoringDemoApp
         static readonly CKTrait Machine = ActivityMonitor.Tags.Register( "Machine" );
         static readonly CKTrait Facebook = ActivityMonitor.Tags.Register( "Facebook" );
 
-        // Tags can be combined with |, intersected with &, excluded with - (except) or ^ (SymmetricExcept).
+        // Tags can be combined with | (or +), intersected with &, excluded with - (except) or ^ (SymmetricExcept - an xor).
         static readonly CKTrait AllDemoTags = Sql|Machine|Facebook;
 
-        void OnTimeTaggedLogs()
+        int _level;
+        bool _group;
+
+        void OnTimeTaggedLogs( int workCount )
         {
             // Fallbacks is a capability of CKTrait that enumerates all the different combinations except the tag itself.
             // Beware: it's 2^(number of traits)-1. This is not efficient but simple.
-            var letsTag = _workCount % 8 == 0
+            var letsTag = workCount % 8 == 0
                             ? AllDemoTags
-                            : AllDemoTags.Fallbacks.ElementAt( (_workCount % 8)-1 );
-            var level = _workCount % 6;
-            var isGroup = _workCount % 2 == 0;
-
-            if( isGroup )
+                            : AllDemoTags.Fallbacks.ElementAt( (workCount % 8)-1 );
+            if( letsTag == AllDemoTags )
             {
-                _monitor.OpenGroup( (LogLevel)(1 << level), letsTag, $"Tag n°{_workCount}" ).Dispose();
+                if( _level++ > (int)LogLevel.Fatal )
+                {
+                    _level = (int)LogLevel.Debug;
+                    _group = !_group;
+                }
+            }
+
+            if( _group )
+            {
+                _monitor.OpenGroup( (LogLevel)(1 << _level), letsTag, $"[{letsTag}] Tag n°{workCount}." )
+                        .Dispose();
             }
             else
             {
-                _monitor.Log( (LogLevel)(1 << level), letsTag, $"Tag n°{_workCount}" );
+                _monitor.Log( (LogLevel)(1 << _level), letsTag, $"[{letsTag}] Tag n°{workCount}." );
             }
         }
     }

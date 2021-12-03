@@ -65,16 +65,17 @@ namespace MonitoringDemoApp
             if( Interlocked.CompareExchange( ref _reentrancyFlag, 1, 0 ) == 0 )
             {
                 HandleDirtyOption();
-                using( _monitor.OpenInfo( $"Work n°{++_workCount}." ) )
+                ++_workCount;
+                using( _monitor.OpenInfo( $"Work n°{_workCount}." ) )
                 {
                     switch( _options.CurrentValue.Mode )
                     {
                         case LoggerTestHostedServiceConfiguration.WorkingMode.StandardWithUnobservedTaskException:
                         case LoggerTestHostedServiceConfiguration.WorkingMode.Standard:
-                            OnTimeStandardLogs();
+                            OnTimeStandardLogs( _workCount );
                             break;
                         case LoggerTestHostedServiceConfiguration.WorkingMode.Tagged:
-                            OnTimeTaggedLogs();
+                            OnTimeTaggedLogs( _workCount );
                             break; 
                     }
                 }
@@ -88,7 +89,15 @@ namespace MonitoringDemoApp
             if( _dirtyOption )
             {
                 _dirtyOption = false;
-                _timer.Change( TimeSpan.Zero, _options.CurrentValue.TimerDuration );
+                var t = _options.CurrentValue.TimerDuration;
+                if( t < TimeSpan.FromMilliseconds(1) )
+                {
+                    _monitor.Error( "Invalid TimerDuration. Cannot be less than 00:00:00.001." );
+                }
+                else
+                {
+                    _timer.Change( TimeSpan.Zero, t );
+                }
             }
         }
 
