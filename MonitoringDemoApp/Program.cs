@@ -58,7 +58,7 @@ namespace MonitoringDemoApp
                 .ConfigureLogging( ( hostingContext, logging ) =>
                 {
                     // Standard .Net logger configuration.
-                    // By default, we route all the .Net logs to a special "monitor" that is the "00000000-0000-0000-0000-000000000000": this
+                    // By default, we route all the .Net logs to a special "monitor" that is the "§ext": this
                     // special (fake) monitor captures all contextless logs sent to GrandOutput.ExternalLog methods.
 
                     // This is added *before* configuration is loaded: configuration can override this default.
@@ -75,8 +75,8 @@ namespace MonitoringDemoApp
                     logging.AddConfiguration( hostingContext.Configuration.GetSection( "Logging" ) );
                 } )
                 // This configures the GrandOutput.Default and provides a scoped IActivityMonitor to the DI.
-                // By default, the section name is "Monitoring" (but it should be "CK-Monitoring").
-                .UseMonitoring( configurationPath: "CK-Monitoring" )
+                // The section name MUST BE "CK-Monitoring".
+                .UseCKMonitoring()
                 .ConfigureServices( (host, services) =>
                 {
                     // Registers the hosted service that periodically sends logs (and its configuration).

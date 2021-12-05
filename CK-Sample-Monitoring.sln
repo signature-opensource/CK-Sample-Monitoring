@@ -1,13 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29230.47
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F0F4D059-B3BA-4E8B-9287-AB7A85E6CC98}"
-	ProjectSection(SolutionItems) = preProject
-		Tests\TestHelper.config = Tests\TestHelper.config
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{F7D4BB46-0A8B-4AAB-AD18-645D96316574}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
@@ -22,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeCakeBuilder", "CodeCake
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonitoringDemoApp", "MonitoringDemoApp\MonitoringDemoApp.csproj", "{12EB58C9-4C1B-4D7E-84DD-662B0ABAC25B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColoredConsoleDemo", "ColoredConsoleDemo\ColoredConsoleDemo.csproj", "{A501A522-9085-440C-A165-FE2E29E7B392}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColoredConsoleDemo", "ColoredConsoleDemo\ColoredConsoleDemo.csproj", "{A501A522-9085-440C-A165-FE2E29E7B392}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
