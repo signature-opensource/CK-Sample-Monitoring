@@ -52,7 +52,7 @@ namespace MonitoringDemoApp
             }
         }
 
-        public void Handle( IActivityMonitor m, GrandOutputEventInfo logEvent )
+        public void Handle( IActivityMonitor m, IMulticastLogEntry logEvent )
         {
             if( _when == BuggyHandlerConfiguration.WhenToBug.Handle )
             {
