@@ -1,4 +1,4 @@
-using Cake.Common;
+
 using Cake.Common.Solution;
 using Cake.Common.IO;
 using Cake.Common.Tools.MSBuild;
@@ -38,7 +38,7 @@ namespace CodeCake
     /// Sample build "script".
     /// Build scripts can be decorated with AddPath attributes that inject existing paths into the PATH environment variable. 
     /// </summary>
-    [AddPath( "%UserProfile%/.nuget/packages/**/tools*" )]
+    
     public partial class Build : CodeCakeHost
     {
         public Build()
@@ -62,7 +62,7 @@ namespace CodeCake
                 .Does( () =>
                  {
                      globalInfo.GetDotnetSolution().Clean();
-                     Cake.CleanDirectories( globalInfo.ReleasesFolder );
+                     Cake.CleanDirectories( globalInfo.ReleasesFolder.ToString() );
                     
                  } );
 
