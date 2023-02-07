@@ -34,21 +34,23 @@ namespace MonitoringDemoApp
                             : AllDemoTags.Fallbacks.ElementAt( (workCount % 8)-1 );
             if( letsTag == AllDemoTags )
             {
-                if( _level++ > (int)LogLevel.Fatal )
+                Debug.Assert( 1 == (int)LogLevel.Debug );
+                Debug.Assert( (1 << 5) == (int)LogLevel.Fatal );
+                if( ++_level == 6 )
                 {
-                    _level = (int)LogLevel.Debug;
+                    _level = 1;
                     _group = !_group;
                 }
             }
 
             if( _group )
             {
-                _monitor.OpenGroup( (LogLevel)(1 << _level), letsTag, $"[{letsTag}] Tag n°{workCount}." )
+                _monitor.OpenGroup( (LogLevel)(1 << _level), letsTag, $"Tag n°{workCount}." )
                         .Dispose();
             }
             else
             {
-                _monitor.Log( (LogLevel)(1 << _level), letsTag, $"[{letsTag}] Tag n°{workCount}." );
+                _monitor.Log( (LogLevel)(1 << _level), letsTag, $"Tag n°{workCount}." );
             }
         }
     }
