@@ -47,7 +47,7 @@ This happens when using timers or the thread pool directly without a try catch.
 
 This 'lost' exception will be hooked by a TaskScheduler.UnobservedTaskException an logged... but at the next GC time!
 " );
-                            Task.Run( () => throw new Exception( "Unhandled exception on the default Task scheduler." ) );
+                            _ = Task.Run( () => throw new Exception( "Unhandled exception on the default Task scheduler." ) );
                         }
                         else _monitor.Trace( @"Throwing unhandled exception has been skipped since ThrowTaskSchedulerUnobservedTaskException is false." );
                         break;

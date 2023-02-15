@@ -53,7 +53,7 @@ namespace MonitoringDemoApp
             return ValueTask.CompletedTask;
         }
 
-        public ValueTask HandleAsync( IActivityMonitor m, IMulticastLogEntry logEvent )
+        public ValueTask HandleAsync( IActivityMonitor m, InputLogEntry logEvent )
         {
             if( _when == BuggyHandlerConfiguration.WhenToBug.Handle )
             {
