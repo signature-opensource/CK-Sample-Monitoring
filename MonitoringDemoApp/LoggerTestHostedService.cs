@@ -3,6 +3,7 @@
 // 
 
 using CK.Core;
+using CK.Monitoring;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -22,6 +23,7 @@ namespace MonitoringDemoApp
     {
         readonly ILoggerFactory _dotNetLoggerFactory;
         readonly IOptionsMonitor<LoggerTestHostedServiceConfiguration> _options;
+        readonly IHostEnvironment _hostEnvironment;
         readonly IActivityMonitor _monitor;
         Timer _timer;
         ILogger _dotNetLogger;
@@ -30,10 +32,13 @@ namespace MonitoringDemoApp
         int _workCount = 0;
         bool _dirtyOption;
 
-        public LoggerTestHostedService( ILoggerFactory dotNetLoggerFactory, IOptionsMonitor<LoggerTestHostedServiceConfiguration> options )
+        public LoggerTestHostedService( ILoggerFactory dotNetLoggerFactory,
+                                        IOptionsMonitor<LoggerTestHostedServiceConfiguration> options,
+                                        IHostEnvironment hostEnvironment )
         {
             _dotNetLoggerFactory = dotNetLoggerFactory;
             _options = options;
+            _hostEnvironment = hostEnvironment; 
             _monitor = new ActivityMonitor( $"I'm monitoring '{nameof(LoggerTestHostedService)}'." );
             _monitor.Info( $"Initially: {options.CurrentValue}" );
             _options.OnChange( ( config, name ) =>
@@ -66,6 +71,17 @@ namespace MonitoringDemoApp
             {
                 HandleDirtyOption();
                 ++_workCount;
+                if( _workCount == 1 )
+                {
+                    // Configuring the CoreApplicationIdentity after the start is possible.
+                    CoreApplicationIdentity.Configure( b =>
+                    {
+                        b.DomainName = "SignatureSample";
+                        b.EnvironmentName = _hostEnvironment.EnvironmentName;
+                        b.PartyName = "MonitoringDemoApp";
+                        b.ContextDescriptor = Environment.CommandLine;
+                    }, initialize: true );
+                }
                 using( _monitor.OpenInfo( $"Work n°{_workCount}." ) )
                 {
                     switch( _options.CurrentValue.Mode )
