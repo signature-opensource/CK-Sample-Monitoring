@@ -52,7 +52,7 @@ namespace CodeCake
                .Does( () =>
                {
                     
-                  globalInfo.GetDotnetSolution().Test();
+                  globalInfo.GetDotnetSolution().SolutionTest();
                } );
 
             // The Default task for this script can be set here.
