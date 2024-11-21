@@ -5,33 +5,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MonitoringDemoApp
+namespace MonitoringDemoApp;
+
+class BuggyHandlerConfiguration : IHandlerConfiguration
 {
-    class BuggyHandlerConfiguration : IHandlerConfiguration
+    public enum WhenToBug
     {
-        public enum WhenToBug
-        {
-            Never,
-            Ctor,
-            Activate,
-            ApplyConfiguration,
-            Deactivate,
-            Handle,
-            OnTimer
-        }
+        Never,
+        Ctor,
+        Activate,
+        ApplyConfiguration,
+        Deactivate,
+        Handle,
+        OnTimer
+    }
 
-        /// <summary>
-        /// Defines when the handler will bug.
-        /// Activation bugs once every 10 activations (this cannot be configured since Activate has no configuration yet).
-        /// </summary>
-        public WhenToBug Bug { get; set; }
+    /// <summary>
+    /// Defines when the handler will bug.
+    /// Activation bugs once every 10 activations (this cannot be configured since Activate has no configuration yet).
+    /// </summary>
+    public WhenToBug Bug { get; set; }
 
-        public IHandlerConfiguration Clone()
+    public IHandlerConfiguration Clone()
+    {
+        return new BuggyHandlerConfiguration
         {
-            return new BuggyHandlerConfiguration
-            {
-                Bug = Bug
-            };
-        }
+            Bug = Bug
+        };
     }
 }
