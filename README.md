@@ -6,7 +6,7 @@ Code and configuration files in this repository are heavily documented: this aim
 be an always-synchronized documentation and how-to for anything related to the CK stack
 monitoring tools.
 
-A sample for CK.Testing.Monitoring is currently missing.
+A sample for the monitor test helper of CK.Testing (formerly in the CK.Testing.Monitoring package) is currently missing.
 
 ## ColoredConsoleDemo
 
